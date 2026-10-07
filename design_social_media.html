@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design & Social Media | Nassim Flyes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --panel: #111a2e;
+    --line: rgba(148, 163, 184, 0.14);
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --green: #22c55e;
+    --red: #f26565;
+    --yellow: #f2c94c;
+    --card-w: 300px;
+    --card-h: 400px;
+    --gap: 26px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Fira Code', ui-monospace, Consolas, monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 44px;
+    padding: 40px 0;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(60% 50% at 50% 0%, rgba(34, 197, 94, 0.10), transparent 70%),
+      radial-gradient(40% 40% at 90% 100%, rgba(59, 130, 246, 0.08), transparent 70%);
+  }
+
+  /* ---------- Header ---------- */
+  .head { width: min(900px, 92vw); }
+  .dots { display: flex; gap: 10px; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+  .dots i { width: 13px; height: 13px; border-radius: 50%; display: block; }
+  .dots i:nth-child(1) { background: var(--red); }
+  .dots i:nth-child(2) { background: var(--yellow); }
+  .dots i:nth-child(3) { background: var(--green); }
+  .cmd { color: var(--green); font-weight: 700; font-size: 1rem; }
+  h1 { font-size: clamp(1.9rem, 5vw, 3rem); margin: 8px 0 6px; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); font-size: .95rem; }
+  .cursor { display: inline-block; width: 10px; height: 1.1em; background: var(--green); vertical-align: -0.15em; margin-left: 4px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- Gallery: one centered line ---------- */
+  .row {
+    width: 100%;
+    overflow: hidden;
+    padding: 36px 0;               /* blasa l hover (kaytla3 l foq) */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .track {
+    display: flex;
+    gap: var(--gap);
+    width: max-content;
+    animation: slide var(--speed, 60s) linear infinite;
+  }
+  .track:hover, .track:focus-within { animation-play-state: paused; }   /* ywqaf 7ta tneqqel l-yed */
+  @keyframes slide { to { transform: translateX(calc(-50% - var(--gap) / 2)); } }
+
+  .card {
+    flex: 0 0 auto;
+    width: var(--card-w);
+    height: var(--card-h);
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    cursor: zoom-in;
+    position: relative;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .3s;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, .45);
+  }
+  .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card:hover, .card:focus-visible {
+    transform: translateY(-12px) scale(1.05);
+    border-color: var(--green);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, .55), 0 0 28px rgba(34, 197, 94, .3);
+    outline: none;
+  }
+  .card .tag {
+    position: absolute; left: 12px; bottom: 12px;
+    background: rgba(10, 15, 30, .82);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--line);
+    padding: 6px 12px; border-radius: 999px;
+    font-size: .78rem;
+    opacity: 0; transform: translateY(6px);
+    transition: opacity .25s, transform .25s;
+  }
+  .tag b { color: var(--green); font-weight: 500; }
+  .expand {
+    position: absolute; top: 12px; right: 12px;
+    width: 38px; height: 38px; border-radius: 10px;
+    background: rgba(10, 15, 30, .82);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--line);
+    color: var(--green);
+    font: inherit; font-size: 1.05rem; cursor: pointer;
+    display: grid; place-items: center;
+    opacity: 0; transform: scale(.85);
+    transition: opacity .25s, transform .25s, background .2s;
+  }
+  .expand:hover { background: var(--green); color: #052e14; }
+  .card:hover .tag, .card:focus-visible .tag, .card:hover .expand, .card:focus-visible .expand, .expand:focus-visible {
+    opacity: 1; transform: none;
+  }
+  .expand:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  /* ---------- Footer ---------- */
+  #footer-terminal {
+    width: min(900px, 92vw);
+    margin-top: 8px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+  }
+  .footer-content { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+  .footer-icons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .footer-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: grid; place-items: center;
+    color: var(--muted); font-size: 1.15rem; text-decoration: none;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    transition: color .2s, border-color .2s, transform .2s, box-shadow .2s;
+  }
+  .footer-icon:hover, .footer-icon:focus-visible {
+    color: var(--green); border-color: var(--green);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .4), 0 0 14px rgba(34, 197, 94, .25);
+    outline: none;
+  }
+  .footer-contact { display: flex; gap: 8px 26px; flex-wrap: wrap; justify-content: center; color: var(--muted); font-size: .85rem; }
+  .footer-contact i { color: var(--green); margin-right: 6px; }
+  .footer-text { color: var(--muted); font-size: .8rem; }
+  .footer-text span { color: var(--green); font-weight: 700; }
+
+  /* ---------- Enlarge window ---------- */
+  .lb {
+    position: fixed; inset: 0; z-index: 50;
+    background: rgba(5, 8, 18, .86);
+    backdrop-filter: blur(10px);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .lb.open { display: flex; }
+  .win {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, .65);
+    width: min(94vw, 880px);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transition: width .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .win.max { width: 98vw; }
+  .bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .bar button.dot {
+    width: 14px; height: 14px; border-radius: 50%; border: 0; cursor: pointer; padding: 0;
+    transition: transform .15s, filter .15s;
+  }
+  .bar button.dot:hover, .bar button.dot:focus-visible { transform: scale(1.25); filter: brightness(1.15); outline: none; }
+  .dot.r { background: var(--red); } .dot.y { background: var(--yellow); } .dot.g { background: var(--green); }
+  .bar .name { margin-left: 8px; font-size: .85rem; color: var(--muted); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar .name b { color: var(--green); font-weight: 500; }
+  .nav { display: flex; gap: 6px; }
+  .nav button {
+    background: transparent; color: var(--text); font: inherit;
+    border: 1px solid var(--line); border-radius: 8px;
+    width: 32px; height: 28px; cursor: pointer;
+    transition: border-color .2s, color .2s;
+  }
+  .nav button:hover, .nav button:focus-visible { border-color: var(--green); color: var(--green); outline: none; }
+  .view { display: grid; place-items: center; padding: 16px; background: #0b1224; }
+  .view img { max-width: 100%; max-height: 76vh; border-radius: 10px; display: block; transition: max-height .35s; }
+  .win.max .view img { max-height: calc(100vh - 140px); }
+
+  @media (max-width: 600px) {
+    :root { --card-w: 220px; --card-h: 300px; --gap: 16px; }
+    .expand, .card .tag { opacity: 1; transform: none; }  /* telefon: ma kayn hover */
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .track { animation: none; }
+    .row { overflow-x: auto; }
+    .cursor { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="head">
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="cmd">$ designs</div>
+    <h1>Design &amp; Social Media</h1>
+    <p class="sub">Meine Projekte, Posts und Kampagnen<span class="cursor"></span></p>
+  </header>
+
+  <main class="row" aria-label="Design-Galerie">
+    <div class="track" id="track"></div>
+  </main>
+
+  <div id="footer-terminal">
+    <div class="footer-content">
+      <div class="footer-icons">
+        <a href="https://www.linkedin.com/in/nassim-flyes-944755253/" target="_blank" rel="noopener" class="footer-icon" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/NassimFlyes" target="_blank" rel="noopener" class="footer-icon" aria-label="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://www.instagram.com/nassimflyes_?igsh=MW12M3Azd3hweGdiNg%3D%3D&utm_source=qr" target="_blank" rel="noopener" class="footer-icon" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/212649017977" target="_blank" rel="noopener" class="footer-icon" aria-label="WhatsApp">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="mailto:flyesnassim77@gmail.com" class="footer-icon" aria-label="E-Mail">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+
+      <div class="footer-contact">
+        <p><i class="fa-solid fa-location-dot"></i> Leipzig, Deutschland</p>
+        <p><i class="fa-solid fa-envelope"></i> flyesnassim77@gmail.com</p>
+      </div>
+
+      <p class="footer-text">Developed by <span>Nassim</span> © 2025</p>
+    </div>
+  </div>
+
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Design Vorschau">
+    <div class="win" id="win">
+      <div class="bar">
+        <button class="dot r" id="btnClose" aria-label="Schließen" title="Schließen"></button>
+        <button class="dot y" id="btnMin" aria-label="Normale Größe" title="Normale Größe"></button>
+        <button class="dot g" id="btnMax" aria-label="Vergrößern" title="Vergrößern / Verkleinern"></button>
+        <span class="name" id="lbCap"></span>
+        <span class="nav">
+          <button id="lbPrev" aria-label="Zurück">‹</button>
+          <button id="lbNext" aria-label="Weiter">›</button>
+        </span>
+      </div>
+      <div class="view"><img id="lbImg" alt=""></div>
+    </div>
+  </div>
+
+<script>
+  /* =====================================================
+     HNA FIN KATZID DESIGNS DYALEK
+     Kol design = { src: "link dyal tswira", title: "ism", type: "nou3" }
+     ===================================================== */
+  const DESIGNS = [
+    { src: "https://LINK-1.com/design1.jpg", title: "Instagram Post", type: "Social Media" },
+    { src: "https://LINK-2.com/design2.jpg", title: "Logo Design",    type: "Branding" },
+    { src: "https://LINK-3.com/design3.jpg", title: "Story Pack",     type: "Social Media" },
+    { src: "https://LINK-4.com/design4.jpg", title: "Poster",         type: "Print" },
+    { src: "https://LINK-5.com/design5.jpg", title: "Kampagne",       type: "Marketing" },
+    { src: "https://LINK-6.com/design6.jpg", title: "Banner",         type: "Web" },
+    { src: "https://LINK-7.com/design7.jpg", title: "Flyer",          type: "Print" },
+    { src: "https://LINK-8.com/design8.jpg", title: "Carousel Post",  type: "Social Media" }
+  ];
+
+  const SPEED = 70;         // tawani l-dawra kamla (ktar = abta2)
+
+  /* ---------- Placeholder ila tswira ma tloadatch ---------- */
+  const palette = [["#22c55e","#0b3d2e"],["#3b82f6","#10234d"],["#f2c94c","#4a3a0c"],["#f26565","#4a1620"],["#a78bfa","#251a4d"],["#14b8a6","#0a3a3a"]];
+  function placeholder(i, label) {
+    const [a, b] = palette[i % palette.length];
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='800' viewBox='0 0 600 800'>
+      <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${b}'/><stop offset='1' stop-color='${a}'/></linearGradient></defs>
+      <rect width='600' height='800' fill='url(#g)'/>
+      <text x='40' y='84' font-family='monospace' font-size='32' fill='#fff' fill-opacity='.85'>$ ${label}</text>
+      <text x='40' y='750' font-family='monospace' font-size='22' fill='#fff' fill-opacity='.6'>src fehlt / Link prüfen</text>
+    </svg>`;
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  /* ---------- Build the line ---------- */
+  const track = document.getElementById("track");
+  track.style.setProperty("--speed", SPEED + "s");
+
+  function makeCard(d, idx, isClone) {
+    const el = document.createElement("div");
+    el.className = "card";
+    const img = document.createElement("img");
+    img.src = d.src; img.alt = d.title; img.loading = "lazy"; img.draggable = false;
+    img.onerror = () => { img.onerror = null; img.src = placeholder(idx, d.title); };
+
+    const tag = document.createElement("span");
+    tag.className = "tag";
+    tag.innerHTML = `<b>$</b> ${d.title}`;
+
+    const btn = document.createElement("button");
+    btn.className = "expand";
+    btn.type = "button";
+    btn.innerHTML = "⤢";
+    btn.setAttribute("aria-label", d.title + " vergrößern");
+
+    el.append(img, tag, btn);
+    el.addEventListener("click", () => openLb(idx, el));
+    if (isClone) { el.setAttribute("aria-hidden", "true"); btn.tabIndex = -1; }
+    return el;
+  }
+
+  // kanrepetiw l-list bach t-ban l-ligne kamla 7ta f chacha kbira, w kanDoubliw l-loop bla qta3
+  const base = [];
+  while (base.length < 8) DESIGNS.forEach((d, i) => base.push(i));
+  base.forEach(i => track.appendChild(makeCard(DESIGNS[i], i, false)));
+  base.forEach(i => track.appendChild(makeCard(DESIGNS[i], i, true)));
+
+  /* ---------- Enlarge window ---------- */
+  const lb = document.getElementById("lb"), win = document.getElementById("win");
+  const lbImg = document.getElementById("lbImg"), lbCap = document.getElementById("lbCap");
+  let cur = 0, fromEl = null;
+
+  function show(i) {
+    cur = (i + DESIGNS.length) % DESIGNS.length;
+    const d = DESIGNS[cur];
+    win.style.visibility = "hidden";
+    lbImg.onload = () => {
+      win.style.visibility = "visible";
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) return;
+      if (fromEl) {   // l-fenetre katkbar men blasat l-card
+        const from = fromEl.getBoundingClientRect(), to = win.getBoundingClientRect();
+        const dx = (from.left + from.width / 2) - (to.left + to.width / 2);
+        const dy = (from.top + from.height / 2) - (to.top + to.height / 2);
+        win.animate([
+          { transform: `translate(${dx}px, ${dy}px) scale(${from.width / to.width}, ${from.height / to.height})`, opacity: .3 },
+          { transform: "none", opacity: 1 }
+        ], { duration: 420, easing: "cubic-bezier(.2,.8,.2,1)" });
+        fromEl = null;
+      } else {
+        win.animate([{ opacity: .4 }, { opacity: 1 }], { duration: 200 });
+      }
+    };
+    lbImg.onerror = () => { lbImg.onerror = null; lbImg.src = placeholder(cur, d.title); };
+    lbImg.src = d.src; lbImg.alt = d.title;
+    lbCap.innerHTML = `<b>$</b> ${d.title} &nbsp;|&nbsp; ${d.type || ""}`;
+  }
+  function openLb(i, el) {
+    fromEl = el || null;
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+    show(i);
+    document.getElementById("btnClose").focus({ preventScroll: true });
+  }
+  function closeLb() { lb.classList.remove("open"); win.classList.remove("max"); document.body.style.overflow = ""; }
+
+  document.getElementById("btnClose").onclick = closeLb;
+  document.getElementById("btnMin").onclick = () => win.classList.remove("max");
+  document.getElementById("btnMax").onclick = () => win.classList.toggle("max");
+  document.getElementById("lbPrev").onclick = () => show(cur - 1);
+  document.getElementById("lbNext").onclick = () => show(cur + 1);
+  lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
+  lbImg.addEventListener("dblclick", () => win.classList.toggle("max"));
+  document.addEventListener("keydown", e => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLb();
+    if (e.key === "ArrowLeft") show(cur - 1);
+    if (e.key === "ArrowRight") show(cur + 1);
+    if (e.key === "f" || e.key === "F") win.classList.toggle("max");
+  });
+</script>
+</body>
+</html>
