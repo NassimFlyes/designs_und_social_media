@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" style="width:100%; max-width:500px; height:auto; font-family: 'Inter', system-ui, sans-serif; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.4);">
+  <defs>
+    <!-- Dark Cyber Background -->
+    <radialGradient id="bgGlow" cx="20%" cy="20%" r="90%">
+      <stop offset="0%" stop-color="#1A0B2E"/>
+      <stop offset="50%" stop-color="#09040E"/>
+      <stop offset="100%" stop-color="#030106"/>
+    </radialGradient>
+    
+    <!-- Holographic Neon Gradient -->
+    <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF007A"/>
+      <stop offset="50%" stop-color="#7B2CBF"/>
+      <stop offset="100%" stop-color="#00F0FF"/>
+    </linearGradient>
+
+    <!-- Glowing Cyan for CTA -->
+    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#7000FF"/>
+    </linearGradient>
+
+    <!-- Glassmorphism Filter Effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="15" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="800" fill="url(#bgGlow)"/>
+
+  <!-- Neon Glowing Ambient Circles -->
+  <circle cx="650" cy="200" r="220" fill="#FF007A" opacity="0.25" filter="url(#glow)"/>
+  <circle cx="200" cy="650" r="250" fill="#00F0FF" opacity="0.2" filter="url(#glow)"/>
+
+  <!-- Top Navigation Tag -->
+  <g transform="translate(60, 60)">
+    <rect width="180" height="38" rx="19" fill="rgba(255, 255, 255, 0.05)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+    <circle cx="20" cy="19" r="5" fill="#00F0FF"/>
+    <text x="35" y="24" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="2">NEXT-GEN SKINCARE</text>
+  </g>
+  
+  <text x="740" y="85" font-size="14" font-weight="800" fill="url(#neonGrad)" letter-spacing="3" text-anchor="end">AURA 2026</text>
+
+  <!-- Big Bold Typography Header -->
+  <text x="60" y="200" font-size="64" font-weight="900" fill="#FFFFFF" letter-spacing="-1.5">DIE ZUKUNFT</text>
+  <text x="60" y="265" font-size="64" font-weight="900" fill="url(#neonGrad)" letter-spacing="-1.5">DEINER HAUT.</text>
+
+  <text x="60" y="325" font-size="18" font-weight="400" fill="#A0A0B2" width="400">
+    <tspan x="60" dy="0">Molekulare Formel mit Bio-Retinol &amp; Peptide-Komplex.</tspan>
+    <tspan x="60" dy="28">Entwickelt in Schweizer Laboren.</tspan>
+  </text>
+
+  <!-- Glassmorphism Main Floating Card -->
+  <g transform="translate(420, 280)">
+    <!-- Glass Background Box -->
+    <rect width="320" height="420" rx="28" fill="rgba(255, 255, 255, 0.03)" stroke="rgba(255, 255, 255, 0.18)" stroke-width="1.5" backdrop-filter="blur(20px)"/>
+    
+    <!-- Inner Glowing Tech Ring -->
+    <circle cx="160" cy="180" r="100" fill="none" stroke="url(#neonGrad)" stroke-width="3" stroke-dasharray="10 15" filter="url(#glow)"/>
+    
+    <!-- Futuristic Minimalist Bottle -->
+    <rect x="130" y="110" width="60" height="150" rx="30" fill="rgba(255,255,255,0.95)"/>
+    <rect x="145" y="80" width="30" height="30" rx="6" fill="#111"/>
+    <!-- Neon Liquid Level -->
+    <rect x="135" y="180" width="50" height="70" rx="20" fill="url(#cyanGlow)" opacity="0.8"/>
+    <text x="160" y="150" font-size="10" font-weight="900" fill="#000" text-anchor="middle" letter-spacing="2">AURA</text>
+    <text x="160" y="162" font-size="7" font-weight="700" fill="#666" text-anchor="middle">LAB LABS</text>
+
+    <!-- Floating Badge -->
+    <g transform="translate(20, 320)">
+      <rect width="280" height="70" rx="18" fill="rgba(0, 0, 0, 0.6)" stroke="rgba(255, 255, 255, 0.1)"/>
+      <text x="20" y="32" font-size="14" font-weight="800" fill="#00F0FF">99.4% REGENERATION</text>
+      <text x="20" y="52" font-size="12" font-weight="500" fill="#888">Klinisch bewiesen f&uuml;r 24h Glow</text>
+    </g>
+  </g>
+
+  <!-- Modern Interactive Minimal Button -->
+  <g transform="translate(60, 630)">
+    <rect width="320" height="70" rx="35" fill="url(#cyanGlow)" filter="url(#glow)"/>
+    <text x="160" y="42" font-size="18" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">JETZT TESTEN — 20% OFF</text>
+  </g>
+
+  <!-- Stats Line -->
+  <g transform="translate(60, 735)">
+    <text x="0" y="0" font-size="13" font-weight="600" fill="#66667A">RATING</text>
+    <text x="0" y="20" font-size="16" font-weight="800" fill="#FFF">★ 4.98 / 5.0</text>
+    
+    <text x="160" y="0" font-size="13" font-weight="600" fill="#66667A">DELIVERY</text>
+    <text x="160" y="20" font-size="16" font-weight="800" fill="#FFF">24H EXPRESSE</text>
+  </g>
+</svg>
